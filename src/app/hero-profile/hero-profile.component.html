@@ -1,0 +1,20 @@
+<ng-container *ngIf="heroe">
+    <h1 class="text-center">{{heroe.name}}</h1>
+    <br>
+    <a class="goback" (click)="goBack()">Atrás</a>
+    <div class="container">
+        <div class="row" class="heroe-profile">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <img [src]="heroe.thumbnail.path + '.' + heroe.thumbnail.extension" alt="No_image">
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <h3>Descripción</h3>
+                <p>{{heroe.description}}</p>
+                <p class="modified">{{heroe.modified | date:'fullDate'}}, {{heroe.modified | date:'shortTime'}}</p>
+                <p *ngIf="team!=undefined && team!=''">Acabas de clasificar a tu heroe en el equipo <strong [style.color]="heroesService.group_colors[team]">{{team}}</strong></p>
+                <p><button type="button" class="btn btn-primary" (click)="launchModal()">Clasificar</button></p>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<modal-poll [title_modal]="question_modal" (setTeam)="getTeam($event)" [team_selected]="team" #modal></modal-poll>
